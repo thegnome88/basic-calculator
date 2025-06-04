@@ -29,7 +29,7 @@ function updateDisplay() {
 }
 
 function numberClicked(number) {
-    if (answerOnScreen) {
+    if (answerOnScreen && currentOperator !== '') {
         previousNumber = parseFloat(currentValue);
         currentValue = '';
         answerOnScreen = false;
@@ -59,10 +59,10 @@ function specialClicked(button) {
         currentValue = '';
         answerOnScreen = false;
         updateDisplay();
-    } else if (button === 'delete' && !answerOnScreen) {
+    } else if (button === 'delete' && (!answerOnScreen || currentOperator === '')) {
         currentValue = currentValue.slice(0, -1);
         updateDisplay();
-    } else if (button === 'dot') {
+    } else if (button === 'dot' && !currentValue.includes('.')) {
         currentValue += '.';
         updateDisplay();
     } else if (button === 'equal') {
